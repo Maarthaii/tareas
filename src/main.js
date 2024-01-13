@@ -3,23 +3,23 @@ const mongoose = require('mongoose');
 const express = require('express');
 const path = require('path');
 const pug = require('pug');
+const dotenv = require('dotenv')
 
-const db = 'mongodb://0.0.0.0:27017/prueba';
-const port = 3000;
+dotenv.config()
+
+const db = process.env.MONGO_INITDB_ROOT_URL;
+const port = process.env.PORT;
 
 const server = express();
 
 //Configuracion
-// //Ruta estatica
 server.use('/', express.static(path.join(__dirname, './public')));
 server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
 
-//Directorio de la plantilla
+// Views Engine
 server.set('views', path.join(__dirname, './views'));
-//Motor de plantilla
 server.set('view engine', 'pug');
-
 
 
 
