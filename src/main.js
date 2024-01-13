@@ -12,16 +12,27 @@ const server = express();
 //Configuracion
 // //Ruta estatica
 server.use('/', express.static(path.join(__dirname, './public')));
+server.use(express.urlencoded({ extended: false }));
+server.use(express.json());
+
+//Directorio de la plantilla
+server.set('views', './views');
+//Motor de plantilla
+server.set('view engine', 'pug');
+
+
+
+server.get('/hello', (req, res) => {
+    res.send('index.pug', {mensaje: "Un mensaje"});
+});
+
 
 //Conexion
 mongoose.connect(db)
     .then(() => console.log('Connected!'));
 
-
-server.get('/', (req, res) => {
-    res.send('');
-});
-
-server.get('/', (req, res) => {
-    res.send();
-});
+    server.listen(() => {
+        console.log(' Server is running on port ' + port);
+        console.log('Click here: http://localhost:' + port + '\n');
+      });
+      
