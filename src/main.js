@@ -22,8 +22,8 @@ server.set('view engine', 'pug');
 
 
 
-server.get('/hello', (req, res) => {
-    res.send('index.pug', {mensaje: "Un mensaje"});
+server.get('/', (req, res) => {
+    res.render('index.pug', {mensaje: "Un mensaje"});
 });
 
 
