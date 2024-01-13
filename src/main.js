@@ -1,13 +1,13 @@
 //Importaciones
-const mongoose = require('mongoose');
 const express = require('express');
 const path = require('path');
 const pug = require('pug');
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
+const router = require('./routes/routes');
+require('./database/db');
 
 dotenv.config()
 
-const db = process.env.MONGO_INITDB_ROOT_URL;
 const port = process.env.PORT;
 
 const server = express();
@@ -21,18 +21,7 @@ server.use(express.json());
 server.set('views', path.join(__dirname, './views'));
 server.set('view engine', 'pug');
 
-
-
-server.get('/', (req, res) => {
-  // Recuerda usar render como metodo, no send
-  res.render('home');
-});
-
-
-//Conexion
-mongoose.connect(db)
- .then(() => console.log('Connected!'));
-    
+server.use('/', router);
 
 //  Hay que pasar el port antes del callback
 server.listen(port, () => {
