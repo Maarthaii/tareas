@@ -23,7 +23,7 @@ server.set('view engine', 'pug');
 
 
 server.get('/', (req, res) => {
-    res.render('index.pug', {mensaje: "Un mensaje"});
+    res.render('index', {mensaje: "Un mensaje"});
 });
 
 
