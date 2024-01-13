@@ -16,23 +16,26 @@ server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
 
 //Directorio de la plantilla
-server.set('views', './views');
+server.set('views', path.join(__dirname, './views'));
 //Motor de plantilla
 server.set('view engine', 'pug');
 
 
 
+
 server.get('/', (req, res) => {
-    res.render('index', {mensaje: "Un mensaje"});
+  // Recuerda usar render como metodo, no send
+  res.render('home');
 });
 
 
 //Conexion
 mongoose.connect(db)
-    .then(() => console.log('Connected!'));
+ .then(() => console.log('Connected!'));
+    
 
-    server.listen(() => {
-        console.log(' Server is running on port ' + port);
-        console.log('Click here: http://localhost:' + port + '\n');
-      });
-      
+//  Hay que pasar el port antes del callback
+server.listen(port, () => {
+  console.log(' Server is running on port ' + port);
+  console.log('Click here: http://localhost:' + port + '\n');
+});
