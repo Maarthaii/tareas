@@ -1,5 +1,10 @@
 extends layouts/main.pug
 
 block content
-
-  p Una pagina 
+  h1 Lista de Tareas
+  ul
+    if tasks
+      each task in tasks
+        li= task.name
+    else
+      li No hay tareas disponibles

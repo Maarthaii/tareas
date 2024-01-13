@@ -1,4 +1,4 @@
-const taskSchema = require('./schemas/task');
+const schema = require('./schemas/task');
 
 const addTask = async (tasks)=>{
     return await schema.create(tasks)

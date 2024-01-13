@@ -2,4 +2,10 @@ extends layouts/main.pug
 
 block content
 
-  p Hola mundo!!!
+  h1 Añadir nueva tarea
+  form(action='/task', method='post')
+    label(for='name') Nombre de la Tarea:
+    input(type='text', name='name', required)
+    label(for='status') Estado de la tarea: 
+    input(type='text', name='status')
+    button(type='submit') Añadir Tarea

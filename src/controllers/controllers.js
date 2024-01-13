@@ -1,26 +1,41 @@
-const {getTasks} = require('../models/task');
-const {addTask} = require('../models/task')
+const {getTasks, addTask} = require('../models/task');
+
 module.exports=class Controllers{
 
     renderHome(req, res) {
         res.render('home'); 
     }
 
-    getAll(req, res){
-
+    getAll(req, res) {
         getTasks()
-        .then (res => console.log(res))
-
-        res.render('task')
+            .then((tasks) => {
+                console.log('Tareas obtenidas:', tasks);
+                res.render('task', { tasks }); 
+            })
+            .catch((err) => {
+                console.log('Error al obtener tareas', err);
+            });
     }
+    
+
 
     newsTask(req, res){
 
-        addTask()
-        .then (res => console.log(res))
+        const newTask = {
+            name: req.body.name,
+            status: req.body.status
+        };
 
-        res.render('task')
-
+        addTask(newTask)
+        .then(() => {
+            console.log('Tarea añadida con exito');
+            res.redirect('/task');
+        })
+        .catch((err) => {
+            console.log('Error al añadir tarea', err);
+        })
     }
+
+
 
 }
