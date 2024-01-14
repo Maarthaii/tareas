@@ -1,6 +1,14 @@
 extends layouts/main.pug
 
 block content
+
+  h1 Lista de Tareas
+
+  form(action='/task/delete', method='post')
+    label(for='taskName') Nombre de la Tarea a Eliminar:
+    input(type='text', name='taskName', required)
+    button(type='submit') Eliminar Tarea
+
   h1 Lista de Tareas
   ul
     if tasks

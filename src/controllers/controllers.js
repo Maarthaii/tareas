@@ -1,4 +1,4 @@
-const {getTasks, addTask} = require('../models/task');
+const {getTasks, addTask, deleteTaskByName} = require('../models/task');
 
 module.exports=class Controllers{
 
@@ -34,8 +34,20 @@ module.exports=class Controllers{
         .catch((err) => {
             console.log('Error al añadir tarea', err);
         })
+    };
+
+    deleteTaskByName(req, res) {
+        const taskName = req.body.taskName; 
+
+        deleteTaskByName(taskName)
+            .then(() => {
+                console.log('Tarea eliminada con éxito');
+                res.redirect('/task'); 
+            })
+            .catch((err) => {
+                console.log('Error al eliminar tarea', err);
+                res.status(500).send('Error');
+            });
     }
-
-
 
 }

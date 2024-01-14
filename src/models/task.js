@@ -8,7 +8,12 @@ const getTasks = async () =>{
     return await schema.find()
 }
 
+const deleteTaskByName = async (taskName) =>{
+    return await schema.deleteOne({name:taskName});
+}
+
 module.exports = {
     addTask,
-    getTasks
+    getTasks,
+    deleteTaskByName
 }
