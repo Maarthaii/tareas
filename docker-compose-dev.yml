@@ -6,11 +6,8 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.dev
-    # env_file: 
-    #   path: ./.env.development
     ports:
       - ${PORT}:${PORT}
-      # - 3000:3000
     volumes:
       - ./:/home/app
     links:
@@ -24,13 +21,9 @@ services:
       - 27017:27017
     volumes:
       - mongo:/data/db
-    # env_file: 
-    #   path: ./.env.development
     environment:
         - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
         - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
-        # - MONGO_INITDB_ROOT_USERNAME=root        
-        # - MONGO_INITDB_ROOT_PASSWORD=password
 
 volumes:
   mongo:
