@@ -7,11 +7,9 @@ dotenv.config()
 const db = process.env.MONGO_URI_TEST
 
 describe('Testeando Status de respuestas',  () => {
+  mongoose.connect(db)
+    .then(() => console.log('Conectada mor'));
 
-  BeforeAll(() => {
-    mongoose.connect(db)
-      .then(() => console.log('Conectada mor'));
-  })
 
   afterAll(() => {
     mongoose.connection.close()
