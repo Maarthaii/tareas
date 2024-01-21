@@ -1,9 +1,17 @@
 const supertest = require('supertest')
 const server = require('../config/server')
-const { default: mongoose } = require('mongoose')
+const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+dotenv.config()
 
+const db = process.env.MONGO_URI_TEST
 
 describe('Testeando Status de respuestas',  () => {
+
+  BeforeAll(() => {
+    mongoose.connect(db)
+      .then(() => console.log('Conectada mor'));
+  })
 
   afterAll(() => {
     mongoose.connection.close()
